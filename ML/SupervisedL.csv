@@ -1,28 +1,10 @@
-"","RNC","Repetitive","Desc.","Phase","Ref","ECD"
-"1","Q321013746-1","No","One-Off","N/A","N/A","N/A"
-"2","Q321013791-1","No","One-Off","N/A","N/A","N/A"
-"3","Q321013792-1","No","One-Off","N/A","N/A","N/A"
-"4","Q321013793-1","No","One-Off","N/A","N/A","N/A"
-"5","Q321013794-1","No","One-Off","N/A","N/A","N/A"
-"6","Q321013795-1","No","One-Off","N/A","N/A","N/A"
-"7","Q321013796-1","No","One-Off","N/A","N/A","N/A"
-"8","Q321013797-1","No","One-Off","N/A","N/A","N/A"
-"9","Q321013729-1","No","One-Off","N/A","N/A","N/A"
-"10","Q321013729-2","Yes","Gap in STGR 23","2","N/A","N/A"
-"11","Q321013763-1","Yes","Trim of Dorsal Angle","2","N/A","N/A"
-"12","Q321013777-1","Yes","Damage Holes while Joining","2","N/A","N/A"
-"13","Q321013725-1","No","One-Off","N/A","N/A","N/A"
-"14","Q321013727-1","No","One-Off","N/A","N/A","N/A"
-"15","Q321013727-2","Yes","Double hole Stiff CTR BOX","3","Q 4470","N/A"
-"16","Q321013759-1","Yes","Double hole Stiff CTR BOX","3","Q 4470","N/A"
-"17","Q321013788-1","No","One-Off","N/A","N/A","N/A"
-"18","Q321013715-1","Yes","Flushness Bullet F","3","N/A","N/A"
-"19","Q321013716-1","No","One-Off","N/A","N/A","N/A"
-"20","Q321013717-1","Yes","Clamp size. Harness. J511/P785B","3","N/A","N/A"
-"21","Q321013718-1","No","One-Off","N/A","N/A","N/A"
-"22","Q321013719-1","Yes","Clamp size. Harness. J511/P785B","3","N/A","N/A"
-"23","Q321013719-2","Yes","Clamp size. Harness. J511/P785B","3","N/A","N/A"
-"24","Q321013728-1","Yes","Clamp size. Harness. J511/P785B","3","N/A","N/A"
-"25","Q321013783-1","No","One-Off","N/A","N/A","N/A"
-"26","Q321013783-2","No","One-Off","N/A","N/A","N/A"
-"27","Q321013783-3","No","One-Off","N/A","N/A","N/A"
+,RNC,Repetitive,Desc.,Phase,Ref,ECD
+1,Q321013840-1,Yes,Parts at lower skin without topcoat,3,Q 4412,30-Jul
+2,Q321013842-1,Yes,Parts at lower skin without topcoat,3,Q 4412,30-Jul
+3,Q321013843-1,Yes,Parts at lower skin without topcoat,3,Q 4412,30-Jul
+4,Q321013849-1,No,One-Off,N/A,N/A,N/A
+5,Q321013837-1,Yes,Gap on tank structure.,2,N/A,N/A
+6,Q321013809-1,Yes,Gap in Cruciform,2,N/A,N/A
+7,Q321013809-2,Yes,Gap in Cruciform,2,N/A,N/A
+8,Q321013725-3,Yes,"Hole with Low ED. Doubler, Pylon",2,N/A,N/A
+9,Q321013725-4,Yes,"Hole with Low ED. Doubler, Pylon",2,N/A,N/A
