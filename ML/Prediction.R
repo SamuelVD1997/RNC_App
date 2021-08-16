@@ -62,22 +62,104 @@ removeSpecialChars <- function(x) gsub("[^a-zA-Z0-9 ]", " ", x)
 
 
 
+
 library(readxl)
-Real_Test <- read_excel("Real_Test.xlsx")
-Real_Test <- Real_Test %>% select(Zone, RNC, Disc_Text)
+
+RNCDay <- read_excel("../Encms.xlsx")
+RNCDay$RNC <- paste0(RNCDay$`NCR Number`, '-', RNCDay$`Discrepancy Number`)
+
+if (format(Sys.Date(),"%A") == "Monday") {
+  Fecha <- format(Sys.Date()-3,"%Y-%m-%d")
+} else {
+  Fecha <- as.Date(format(Sys.Date()-1,"%Y-%m-%d"))
+}
+
+RNCDay$`Discrepancy Creation Date` <- as.Date(RNCDay$`Discrepancy Creation Date`)
+RNCDay <- filter(RNCDay,`Discrepancy Creation Date` == Fecha)
+RNCDay$`Discrepancy Creation Date` <-as.Date(format(RNCDay$`Discrepancy Creation Date`,"%d-%m-%Y"))
+RNCDay$`Work Center` <- substr(RNCDay$`Work Center`, 1, 6)
+library(readr)
+PU11WC <- read_csv("../WC.csv")
+
+RNCDay$`Discrepancy Text`[is.na(RNCDay$`Discrepancy Text`)] <- "UNDEFINED IF METHODS"
+
+
+RNCPU11 <- filter(RNCDay, `Work Center` %in% PU11WC$`Work Center`)
+
+for (i in 1:nrow(RNCPU11)){
+  
+  if (str_detect(RNCPU11$`Discrepancy Text`[i], 'METH|DESIGN') == TRUE){
+    
+    RNCPU11$`Preliminary Cause Code`[i] <- 'METHODS'
+    
+  }
+  
+  RNCPU11$Plant[i] <- "PU11" 
+  
+}
+
+RNCPU11 <- inner_join(RNCPU11,PU11WC, by = 'Work Center')
+
+RNCPU11 <- RNCPU11 %>% select(
+  Plant,
+  `Zone`,
+  `RNC`,
+  `NCR Type`,
+  `Discrepancy Creation Date`,
+  `Work Center`,
+  `Aircraft Number`,
+  `Part Number Affected`,
+  `Part Description`,
+  `Preliminary Cause Code`,
+  `Discrepancy Text`
+)
+
+RNCPU11 <- RNCPU11 %>% filter(`Preliminary Cause Code` == 'METHODS') %>% select(Zone, RNC, `Discrepancy Text`)
+colnames(RNCPU11) <- c("Zone", "RNC", "Disc_Text")
+
+
+
+RNCPU2 <- filter(RNCDay, !(`Work Center` %in% PU11WC$`Work Center`) & `Plant Code` == 'Q3')
+
+for (i in 1:nrow(RNCPU2)){
+  
+  if (str_detect(RNCPU2$`Discrepancy Text`[i], 'METH|DESIGN') == TRUE){
+    
+    RNCPU2$`Preliminary Cause Code`[i] <- 'METHODS'
+    
+  }
+  
+  RNCPU2$Plant[i] <- "PU2" 
+  
+}
+
+RNCPU2 <- RNCPU2 %>% select(
+  Plant,
+  `RNC`,
+  `NCR Type`,
+  `Discrepancy Creation Date`,
+  `Work Center`,
+  `Aircraft Number`,
+  `Part Number Affected`,
+  `Part Description`,
+  `Preliminary Cause Code`,
+  `Discrepancy Text`
+)
+
+RNCPU2 <- RNCPU2 %>% filter(`Preliminary Cause Code` == 'METHODS')
+
 
 
 #------------Group by Zones----------
-
 RNC <- c()
 
-Zones <- as.data.frame(unique(Real_Test$Zone))
+Zones <- as.data.frame(unique(RNCPU11$Zone))
 
 
 
 for (i in 1:nrow(Zones)){
   
-  Cur_Zone <- filter(Real_Test, Zone == Zones$`unique(Real_Test$Zone)`[i])
+  Cur_Zone <- filter(RNCPU11, Zone == Zones$`unique(RNCPU11$Zone)`[i])
   
   Test <- Cur_Zone[-1]
   
