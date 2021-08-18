@@ -61,9 +61,56 @@ removeSpecialChars <- function(x) gsub("[^a-zA-Z0-9 ]", " ", x)
 #-------------------------------------------------
 
 
-
 library(readxl)
-Real_Test <- read_excel("Real_Test.xlsx")
+RNCDay <- read_excel("../Encms.xlsx")
+RNCDay$RNC <- paste0(RNCDay$`NCR Number`, '-', RNCDay$`Discrepancy Number`)
+
+if (format(Sys.Date(),"%A") == "Monday") {
+  Fecha <- format(Sys.Date()-3,"%Y-%m-%d")
+} else {
+  Fecha <- as.Date(format(Sys.Date()-1,"%Y-%m-%d"))
+}
+
+
+RNCDay$`Discrepancy Creation Date` <- as.Date(RNCDay$`Discrepancy Creation Date`)
+RNCDay <- filter(RNCDay,`Discrepancy Creation Date` == Fecha)
+RNCDay$`Discrepancy Creation Date` <-as.Date(format(RNCDay$`Discrepancy Creation Date`,"%d-%m-%Y"))
+RNCDay$`Discrepancy Text`[is.na(RNCDay$`Discrepancy Text`)] <- "UNDEFINED IF METHODS"
+
+RNCDay$`Work Center` <- substr(RNCDay$`Work Center`, 1, 6)
+
+library(readr)
+PU11WC <- read_csv("../WC.csv")
+
+
+
+RNCPU11 <- filter(RNCDay, `Work Center` %in% PU11WC$`Work Center`)
+
+for (i in 1:nrow(RNCPU11)){
+  
+  if (str_detect(RNCPU11$`Discrepancy Text`[i], 'METH|DESIGN') == TRUE){
+    
+    RNCPU11$`Preliminary Cause Code`[i] <- 'METHODS'
+    
+  }
+  
+  RNCPU11$Plant[i] <- "PU11" 
+  
+}
+
+RNCPU11 <- inner_join(RNCPU11,PU11WC, by = 'Work Center')
+
+
+
+RNCPU11 <- RNCPU11 %>% filter(`Preliminary Cause Code` == 'METHODS') %>% select(
+  Zone,
+  `RNC`,
+  `Discrepancy Text` 
+)
+
+colnames(RNCPU11) <- c('Zone', 'RNC', 'Disc_Text')
+
+Real_Test <- RNCPU11
 Real_Test <- Real_Test %>% select(Zone, RNC, Disc_Text)
 
 

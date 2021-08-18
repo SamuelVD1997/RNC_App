@@ -179,6 +179,7 @@ if (format(Sys.Date(),"%A") == "Monday") {
   Fecha <- as.Date(format(Sys.Date()-1,"%Y-%m-%d"))
 }
 
+
 RNCDay$`Discrepancy Creation Date` <- as.Date(RNCDay$`Discrepancy Creation Date`)
 RNCDay <- filter(RNCDay,`Discrepancy Creation Date` == Fecha)
 RNCDay$`Discrepancy Creation Date` <-as.Date(format(RNCDay$`Discrepancy Creation Date`,"%d-%m-%Y"))
@@ -694,7 +695,7 @@ server <- function(input, output, session) {
   output$DTRNCPU11 <- DT::renderDT({
     
     
-    DisplayTPU11 <- RNCPU11 %>% filter( `Preliminary Cause Code` == 'METHODS') %>% inner_join(SupervisedL, by = "RNC")
+    DisplayTPU11 <- RNCPU11 %>% filter(`Preliminary Cause Code` == 'METHODS') %>% inner_join(SupervisedL, by = "RNC") 
     
     
     DT::datatable(DisplayTPU11[-11], class = 'cell-border stripe', rownames = F, filter = 'top',
@@ -851,7 +852,7 @@ server <- function(input, output, session) {
   ### Analysis
   
   ##General
-  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-06-01"), by = "month")
+  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-07-01"), by = "month")
   Total <- data.frame(year.month.r, TimeSeries$`Total RNC`)
   Total <- xts(Total$TimeSeries..Total.RNC.,Total$year.month.r)
   Meth <- data.frame(year.month.r, TimeSeries$`Methods RNC`)
@@ -1019,7 +1020,7 @@ server <- function(input, output, session) {
   TimeSeries1 <- read_excel("Raw_Data.xlsx", 
                             sheet = "TSZ1")
   
-  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-06-01"), by = "month")
+  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-07-01"), by = "month")
   Total <- data.frame(year.month.r, TimeSeries1$`Total RNC`)
   Total <- xts(Total$TimeSeries1..Total.RNC.,Total$year.month.r)
   Meth <- data.frame(year.month.r, TimeSeries1$`Methods RNC`)
@@ -1174,7 +1175,7 @@ server <- function(input, output, session) {
   TimeSeries2 <- read_excel("Raw_Data.xlsx", 
                             sheet = "TSZ2")
   
-  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-06-01"), by = "month")
+  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-07-01"), by = "month")
   Total <- data.frame(year.month.r, TimeSeries2$`Total RNC`)
   Total <- xts(Total$TimeSeries2..Total.RNC.,Total$year.month.r)
   Meth <- data.frame(year.month.r, TimeSeries2$`Methods RNC`)
@@ -1323,7 +1324,7 @@ server <- function(input, output, session) {
   TimeSeries31 <- read_excel("Raw_Data.xlsx", 
                              sheet = "TSZ31")
   
-  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-06-01"), by = "month")
+  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-07-01"), by = "month")
   Total31 <- data.frame(year.month.r, TimeSeries31$`Total RNC`)
   Total31 <- xts(Total31$TimeSeries31..Total.RNC.,Total31$year.month.r)
   Meth31 <- data.frame(year.month.r, TimeSeries31$`Methods RNC`)
@@ -1473,7 +1474,7 @@ server <- function(input, output, session) {
   TimeSeries32 <- read_excel("Raw_Data.xlsx", 
                              sheet = "TSZ32")
   
-  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-06-01"), by = "month")
+  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-07-01"), by = "month")
   Total32 <- data.frame(year.month.r, TimeSeries32$`Total RNC`)
   Total32 <- xts(Total32$TimeSeries32..Total.RNC.,Total32$year.month.r)
   Meth32 <- data.frame(year.month.r, TimeSeries32$`Methods RNC`)
@@ -1623,7 +1624,7 @@ server <- function(input, output, session) {
   TimeSeries33 <- read_excel("Raw_Data.xlsx", 
                              sheet = "TSZ33")
   
-  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-06-01"), by = "month")
+  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-07-01"), by = "month")
   Total33 <- data.frame(year.month.r, TimeSeries33$`Total RNC`)
   Total33 <- xts(Total33$TimeSeries33..Total.RNC.,Total33$year.month.r)
   Meth33 <- data.frame(year.month.r, TimeSeries33$`Methods RNC`)
@@ -1773,7 +1774,7 @@ server <- function(input, output, session) {
   TimeSeries34 <- read_excel("Raw_Data.xlsx", 
                              sheet = "TSZ34")
   
-  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-06-01"), by = "month")
+  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-07-01"), by = "month")
   Total34 <- data.frame(year.month.r, TimeSeries34$`Total RNC`)
   Total34 <- xts(Total34$TimeSeries34..Total.RNC.,Total34$year.month.r)
   Meth34 <- data.frame(year.month.r, TimeSeries34$`Methods RNC`)
@@ -1925,7 +1926,7 @@ server <- function(input, output, session) {
   TimeSeries4 <- read_excel("Raw_Data.xlsx", 
                             sheet = "TSZ4")
   
-  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-06-01"), by = "month")
+  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-07-01"), by = "month")
   Total4 <- data.frame(year.month.r, TimeSeries4$`Total RNC`)
   Total4 <- xts(Total4$TimeSeries4..Total.RNC.,Total4$year.month.r)
   Meth4 <- data.frame(year.month.r, TimeSeries4$`Methods RNC`)
@@ -2072,7 +2073,7 @@ server <- function(input, output, session) {
   TimeSeries5 <- read_excel("Raw_Data.xlsx", 
                             sheet = "TSZ5")
   
-  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-06-01"), by = "month")
+  year.month.r <- seq.Date(as.Date("2019-01-01"), as.Date("2021-07-01"), by = "month")
   Total5 <- data.frame(year.month.r, TimeSeries5$`Total RNC`)
   Total5 <- xts(Total5$TimeSeries5..Total.RNC.,Total5$year.month.r)
   Meth5 <- data.frame(year.month.r, TimeSeries5$`Methods RNC`)
@@ -6232,11 +6233,12 @@ server <- function(input, output, session) {
   output$Topics1 <- renderPlotly({
     
     
+    
     TopicsTS <- read.csv("./ML/Hist_Topics.csv") 
     
-    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
-    TopicTS <- TopicsTS %>% filter(Zone == 1) %>% group_by(Issue) %>% summarize(count = n())
     
+    TopicTS <- TopicsTS %>% filter(Zone == 1) %>% group_by(Issue) %>% summarize(count = n())
+    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
     plot_ly(TopicTS, x = ~Issue, y = ~count, type = 'bar',
             marker = list(color = 'rgb(158,202,225)',
                           line = list(color = 'rgb(8,48,107)',
@@ -6251,9 +6253,9 @@ server <- function(input, output, session) {
   output$Topics2 <- renderPlotly({
     
     TopicsTS <- read.csv("./ML/Hist_Topics.csv") 
-    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
-    TopicTS <- TopicsTS %>% filter(Zone == 2) %>% group_by(Issue) %>% summarize(count = n())
     
+    TopicTS <- TopicsTS %>% filter(Zone == 2) %>% group_by(Issue) %>% summarize(count = n())
+    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
     plot_ly(TopicTS, x = ~Issue, y = ~count, type = 'bar',
             marker = list(color = 'rgb(158,202,225)',
                           line = list(color = 'rgb(8,48,107)',
@@ -6268,9 +6270,9 @@ server <- function(input, output, session) {
   output$Topics31 <- renderPlotly({
     
     TopicsTS <- read.csv("./ML/Hist_Topics.csv") 
-    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
-    TopicTS <- TopicsTS %>% filter(Zone == 31) %>% group_by(Issue) %>% summarize(count = n())
     
+    TopicTS <- TopicsTS %>% filter(Zone == 31) %>% group_by(Issue) %>% summarize(count = n())
+    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
     plot_ly(TopicTS, x = ~Issue, y = ~count, type = 'bar',
             marker = list(color = 'rgb(158,202,225)',
                           line = list(color = 'rgb(8,48,107)',
@@ -6285,9 +6287,9 @@ server <- function(input, output, session) {
   output$Topics32 <- renderPlotly({
     
     TopicsTS <- read.csv("./ML/Hist_Topics.csv") 
-    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
-    TopicTS <- TopicsTS %>% filter(Zone == 32) %>% group_by(Issue) %>% summarize(count = n())
     
+    TopicTS <- TopicsTS %>% filter(Zone == 32) %>% group_by(Issue) %>% summarize(count = n())
+    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
     plot_ly(TopicTS, x = ~Issue, y = ~count, type = 'bar',
             marker = list(color = 'rgb(158,202,225)',
                           line = list(color = 'rgb(8,48,107)',
@@ -6302,9 +6304,9 @@ server <- function(input, output, session) {
   output$Topics33 <- renderPlotly({
     
     TopicsTS <- read.csv("./ML/Hist_Topics.csv") 
-    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
+   
     TopicTS <- TopicsTS %>% filter(Zone == 33) %>% group_by(Issue) %>% summarize(count = n())
-    
+    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
     plot_ly(TopicTS, x = ~Issue, y = ~count, type = 'bar',
             marker = list(color = 'rgb(158,202,225)',
                           line = list(color = 'rgb(8,48,107)',
@@ -6319,9 +6321,9 @@ server <- function(input, output, session) {
   output$Topics34 <- renderPlotly({
     
     TopicsTS <- read.csv("./ML/Hist_Topics.csv") 
-    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
-    TopicTS <- TopicsTS %>% filter(Zone == 34) %>% group_by(Issue) %>% summarize(count = n())
     
+    TopicTS <- TopicsTS %>% filter(Zone == 34) %>% group_by(Issue) %>% summarize(count = n())
+    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
     plot_ly(TopicTS, x = ~Issue, y = ~count, type = 'bar',
             marker = list(color = 'rgb(158,202,225)',
                           line = list(color = 'rgb(8,48,107)',
@@ -6336,9 +6338,9 @@ server <- function(input, output, session) {
   output$Topics4 <- renderPlotly({
     
     TopicsTS <- read.csv("./ML/Hist_Topics.csv") 
-    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
-    TopicTS <- TopicsTS %>% filter(Zone == 4) %>% group_by(Issue) %>% summarize(count = n())
     
+    TopicTS <- TopicsTS %>% filter(Zone == 4) %>% group_by(Issue) %>% summarize(count = n())
+    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
     plot_ly(TopicTS, x = ~Issue, y = ~count, type = 'bar',
             marker = list(color = 'rgb(158,202,225)',
                           line = list(color = 'rgb(8,48,107)',
@@ -6353,9 +6355,9 @@ server <- function(input, output, session) {
   output$TopicsMTS <- renderPlotly({
     
     TopicsTS <- read.csv("./ML/Hist_Topics.csv") 
-    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
-    TopicTS <- TopicsTS %>% filter(Zone == "MTS") %>% group_by(Issue) %>% summarize(count = n())
     
+    TopicTS <- TopicsTS %>% filter(Zone == "MTS") %>% group_by(Issue) %>% summarize(count = n())
+    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
     plot_ly(TopicTS, x = ~Issue, y = ~count, type = 'bar',
             marker = list(color = 'rgb(158,202,225)',
                           line = list(color = 'rgb(8,48,107)',

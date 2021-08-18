@@ -1,10 +1,11 @@
 ,RNC,Repetitive,Desc.,Phase,Ref,ECD
-1,Q321013840-1,Yes,Parts at lower skin without topcoat,3,Q 4412,30-Jul
-2,Q321013842-1,Yes,Parts at lower skin without topcoat,3,Q 4412,30-Jul
-3,Q321013843-1,Yes,Parts at lower skin without topcoat,3,Q 4412,30-Jul
-4,Q321013849-1,No,One-Off,N/A,N/A,N/A
-5,Q321013837-1,Yes,Gap on tank structure.,2,N/A,N/A
-6,Q321013809-1,Yes,Gap in Cruciform,2,N/A,N/A
-7,Q321013809-2,Yes,Gap in Cruciform,2,N/A,N/A
-8,Q321013725-3,Yes,"Hole with Low ED. Doubler, Pylon",2,N/A,N/A
-9,Q321013725-4,Yes,"Hole with Low ED. Doubler, Pylon",2,N/A,N/A
+10,Q321014018-1,Yes,Damage Holes while Joining,2,N/A,N/A
+9,Q321014015-2,Yes,Gap on clamps. Cargo Door,4,RFC 61930,44421
+8,Q321014015-1,Yes,Gap on clamps. Cargo Door,4,RFC 61930,44421
+7,Q321014001-1,Yes,Shooting of Key Characteristics,1,N/A,N/A
+6,Q321013996-5,Yes,Shooting of Key Characteristics,1,N/A,N/A
+5,Q321013996-4,Yes,Shooting of Key Characteristics,1,N/A,N/A
+4,Q321013996-3,Yes,Shooting of Key Characteristics,1,N/A,N/A
+3,Q321013996-2,Yes,Shooting of Key Characteristics,1,N/A,N/A
+2,Q321013996-1,Yes,Shooting of Key Characteristics,1,N/A,N/A
+1,Q321013991-1,Yes,Flushness Bullet F,3,N/A,N/A

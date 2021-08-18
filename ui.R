@@ -2364,7 +2364,7 @@ ui <- dashboardPage(
                         column(6,
                                img(
                                  class = "img-responsive img-rounded center-block",
-                                 src = 'Q321000359-1.PNG',
+                                 src = 'Q321010579-1.PNG',
                                  height = '100%',
                                  width = '100%'
                                )
