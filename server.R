@@ -176,7 +176,7 @@ RNCDay$RNC <- paste0(RNCDay$`NCR Number`, '-', RNCDay$`Discrepancy Number`)
 if (format(Sys.Date(),"%A") == "Monday") {
   Fecha <- format(Sys.Date()-3,"%Y-%m-%d")
 } else {
-  Fecha <- as.Date(format(Sys.Date()-1,"%Y-%m-%d"))
+  Fecha <- as.Date(format(Sys.Date()-2,"%Y-%m-%d"))
 }
 
 
@@ -230,7 +230,7 @@ RNCDay$`Work Center` <- substr(RNCDay$`Work Center`, 1, 6)
 
 library(readr)
 PU11WC <- read_csv("WC.csv")
-
+PU2WC <- read_csv("WC_PU2.csv") 
 RNCDay$`Discrepancy Text`[is.na(RNCDay$`Discrepancy Text`)] <- "UNDEFINED IF METHODS"
 
 
@@ -263,7 +263,7 @@ RNCPU11 <- RNCPU11 %>% select(
   `Preliminary Cause Code`
 )
 
-RNCPU2 <- filter(RNCDay, !(`Work Center` %in% PU11WC$`Work Center`) & `Plant Code` == 'Q3')
+RNCPU2 <- filter(RNCDay, `Work Center` %in% PU2WC$`Work Center`)
 
 for (i in 1:nrow(RNCPU2)){
   
@@ -277,8 +277,11 @@ for (i in 1:nrow(RNCPU2)){
   
 }
 
+RNCPU2 <- inner_join(RNCPU2,PU2WC, by = 'Work Center')
+
 RNCPU2 <- RNCPU2 %>% select(
   Plant,
+  Zone,
   `RNC`,
   `NCR Type`,
   `Discrepancy Creation Date`,
@@ -397,19 +400,22 @@ server <- function(input, output, session) {
   })
   
   
-  if (format(Sys.Date(),"%A") == "Monday") {
+  if(format(Sys.Date(),"%A") == "Monday") {
     Dis <- 0
   } else if (format(Sys.Date(),"%A") == "Tuesday"){
     Dis <- 1
   } else if (format(Sys.Date(),"%A") == "Wednesday"){
     Dis <- 2
-  } else if (format(Sys.Date(),"%A") == "Thursday"){
+  } else if (format(Sys.Date(),"%A") == "jueves"){
     Dis <- 3
   } else if (format(Sys.Date(),"%A") == "Friday"){
     Dis <- 4
   }
   
+
   Daysofweek <-seq(Sys.Date()-Dis, Sys.Date(), by = "days")
+  
+  
   
   
   Week11 <- filter(TS11, Date %in% Daysofweek)
