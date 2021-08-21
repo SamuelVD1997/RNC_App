@@ -100,18 +100,28 @@ for (i in 1:nrow(RNCPU11)){
 
 RNCPU11 <- inner_join(RNCPU11,PU11WC, by = 'Work Center')
 
+RNCPU11 <- RNCPU11 %>% select(
+  `Zone`,
+  `RNC`,
+  `NCR Type`,
+  `Discrepancy Creation Date`,
+  `Work Center`,
+  `Aircraft Number`,
+  `Part Number Affected`,
+  `Part Description`,
+  `Preliminary Cause Code`,
+  `Discrepancy Text`
+)
 
-
-RNCPU11 <- RNCPU11 %>% filter(`Preliminary Cause Code` == 'METHODS') %>% select(
+Real_Test <- RNCPU11 %>% filter(`Preliminary Cause Code` == 'METHODS') %>% select(
   Zone,
   `RNC`,
   `Discrepancy Text` 
 )
 
-colnames(RNCPU11) <- c('Zone', 'RNC', 'Disc_Text')
+colnames(Real_Test) <- c('Zone', 'RNC', 'Disc_Text')
 
-Real_Test <- RNCPU11
-Real_Test <- Real_Test %>% select(Zone, RNC, Disc_Text)
+
 
 
 #------------Group by Zones----------
@@ -761,6 +771,8 @@ for ( i in 1:nrow(RNC)){
 }
 
 RNC <- RNC %>% select(RNC,Repetitive, `Desc.`, Phase, Ref, ECD)
+
+RNC <- RNCPU11 %>% inner_join(RNC, by = 'RNC')
 
 
 write.csv(RNC, ".\\SupervisedL.csv")
