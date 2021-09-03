@@ -5,9 +5,9 @@ account: samuelvd
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4014246
-bundleId: 4944874
+bundleId: 4996730
 url: https://samuelvd.shinyapps.io/rnc_dashboard/
-when: 1629463304.48125
-lastSyncTime: 1629463304.48125
+when: 1630673536.14262
+lastSyncTime: 1630673536.14262
 asMultiple: FALSE
 asStatic: FALSE
