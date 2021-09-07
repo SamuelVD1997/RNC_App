@@ -168,6 +168,8 @@ HoursSite <- read_excel("HoursSite.xlsx")
 
 SupervisedL <- read.csv("./ML/SupervisedL.csv")
 
+SupervisedL <- SupervisedL[c(3,12:16)]
+
 library(readxl)
 RNCDay <- read_excel("Encms.xlsx")
 RNCDay$RNC <- paste0(RNCDay$`NCR Number`, '-', RNCDay$`Discrepancy Number`)
