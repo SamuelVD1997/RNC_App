@@ -84,7 +84,8 @@ word_chart <- function(data, input, title) {
 }
 #----------------------------------------------------------------------
 
-OText <- read.csv("TopicsMTS.csv") 
+OText <- read_excel("TC7-8.xlsx")
+
 Text <- OText 
 
 
@@ -128,6 +129,7 @@ Text_words_filtered <- Text %>%
 cnlp_init_udpipe()
 
 TextFAn <- Text %>% select(RNC, Discrepancy_Text)
+
 Text_annotation <- cnlp_annotate(input = TextFAn, text_name = "Discrepancy_Text", doc_name = "RNC")
 
 
@@ -163,20 +165,22 @@ top_words <- top_words_per_issue %>%
   filter(multi_genre < 2) %>%
   select(Issue, top_word = word)  
 
-
+write.csv(top_words, "top_wordsTC7-8.csv")
 n_distinct(Text$Issue)
 
 issue1_word <- lapply(top_words[top_words$Issue == 1,], as.character)
 issue2_word <- lapply(top_words[top_words$Issue == 2,], as.character)
 issue3_word <- lapply(top_words[top_words$Issue == 3,], as.character)
 issue4_word <- lapply(top_words[top_words$Issue == 4,], as.character)
-# issue5_word <- lapply(top_words[top_words$Issue == 5,], as.character)
-# issue6_word <- lapply(top_words[top_words$Issue == 6,], as.character)
-# issue7_word <- lapply(top_words[top_words$Issue == 7,], as.character)
-# issue8_word <- lapply(top_words[top_words$Issue == 8,], as.character)
-# issue9_word <- lapply(top_words[top_words$Issue == 9,], as.character)
-# issue10_word <- lapply(top_words[top_words$Issue == 10,], as.character)
-# issue11_word <- lapply(top_words[top_words$Issue == 11,], as.character)
+issue5_word <- lapply(top_words[top_words$Issue == 5,], as.character)
+issue6_word <- lapply(top_words[top_words$Issue == 6,], as.character)
+issue7_word <- lapply(top_words[top_words$Issue == 7,], as.character)
+issue8_word <- lapply(top_words[top_words$Issue == 8,], as.character)
+issue9_word <- lapply(top_words[top_words$Issue == 9,], as.character)
+issue10_word <- lapply(top_words[top_words$Issue == 10,], as.character)
+issue11_word <- lapply(top_words[top_words$Issue == 11,], as.character)
+issue12_word <- lapply(top_words[top_words$Issue == 12,], as.character)
+issue13_word <- lapply(top_words[top_words$Issue == 13,], as.character)
 
 features_func_issue <- function(data) {
   features <- data %>%
@@ -202,20 +206,25 @@ features_func_issue <- function(data) {
              sum(ifelse(word %in% issue3_word$top_word,1,0)),
            issue4_word_count =
              sum(ifelse(word %in% issue4_word$top_word,1,0)),
-           # issue5_word_count =
-           #   sum(ifelse(word %in% issue5_word$top_word,1,0)),
-           # issue6_word_count =
-           #   sum(ifelse(word %in% issue6_word$top_word,1,0)),
-           # issue7_word_count =
-           #   sum(ifelse(word %in% issue7_word$top_word,1,0)),
-           # issue8_word_count =
-           #   sum(ifelse(word %in% issue8_word$top_word,1,0)),
-           # issue9_word_count =
-           #   sum(ifelse(word %in% issue9_word$top_word,1,0)),
-           # issue10_word_count =
-           #   sum(ifelse(word %in% issue10_word$top_word,1,0)),
-           # issue11_word_count =
-           #   sum(ifelse(word %in% issue11_word$top_word,1,0))
+           issue5_word_count =
+             sum(ifelse(word %in% issue5_word$top_word,1,0)),
+           issue6_word_count =
+             sum(ifelse(word %in% issue6_word$top_word,1,0)),
+           issue7_word_count =
+             sum(ifelse(word %in% issue7_word$top_word,1,0)),
+           issue8_word_count =
+             sum(ifelse(word %in% issue8_word$top_word,1,0)),
+           issue9_word_count =
+             sum(ifelse(word %in% issue9_word$top_word,1,0)),
+           issue10_word_count =
+             sum(ifelse(word %in% issue10_word$top_word,1,0)),
+           issue11_word_count =
+             sum(ifelse(word %in% issue11_word$top_word,1,0)),
+           issue12_word_count =
+             sum(ifelse(word %in% issue12_word$top_word,1,0)),
+           issue13_word_count =
+             sum(ifelse(word %in% issue13_word$top_word,1,0)),
+           
     ) %>%
     select(-word) %>%
     distinct() %>% #to obtain one record per document
@@ -238,7 +247,7 @@ task_train <- normalizeFeatures(task_train, method = "standardize",
 
 
 rf_model = train(makeLearner("classif.randomForest", id = "Random Forest", predict.type = "prob"), task_train)
-saveRDS(rf_model, "./final_modelMTS.rds")
+saveRDS(rf_model, "./final_modelTC7-8.rds")
 
 
 #-------------Test-----------------
