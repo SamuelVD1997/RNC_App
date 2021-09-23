@@ -84,7 +84,7 @@ word_chart <- function(data, input, title) {
 }
 #----------------------------------------------------------------------
 
-OText <- read_excel("TC7-8.xlsx")
+OText <- read.csv('Topics1.csv')
 
 Text <- OText 
 
@@ -137,7 +137,7 @@ Text_tidy <- Text_annotation$token %>%
   select(RNC = doc_id, word = token, lemma, upos) %>%
   filter(upos %in% c("VERB","NOUN","NUM")) %>% 
   inner_join(Text_words_filtered, by = c("word", "RNC")) %>%
-  select(RNC, word = lemma, Issue) %>%
+  select(RNC, word = lemma, Issue) %>% inner_join(Text, by = RNC) %>% select(RNC, Part, Part_Desc, word)
   distinct() 
 
 number_of_words = 5500
@@ -170,17 +170,17 @@ n_distinct(Text$Issue)
 
 issue1_word <- lapply(top_words[top_words$Issue == 1,], as.character)
 issue2_word <- lapply(top_words[top_words$Issue == 2,], as.character)
-issue3_word <- lapply(top_words[top_words$Issue == 3,], as.character)
-issue4_word <- lapply(top_words[top_words$Issue == 4,], as.character)
-issue5_word <- lapply(top_words[top_words$Issue == 5,], as.character)
-issue6_word <- lapply(top_words[top_words$Issue == 6,], as.character)
-issue7_word <- lapply(top_words[top_words$Issue == 7,], as.character)
-issue8_word <- lapply(top_words[top_words$Issue == 8,], as.character)
-issue9_word <- lapply(top_words[top_words$Issue == 9,], as.character)
-issue10_word <- lapply(top_words[top_words$Issue == 10,], as.character)
-issue11_word <- lapply(top_words[top_words$Issue == 11,], as.character)
-issue12_word <- lapply(top_words[top_words$Issue == 12,], as.character)
-issue13_word <- lapply(top_words[top_words$Issue == 13,], as.character)
+# issue3_word <- lapply(top_words[top_words$Issue == 3,], as.character)
+# issue4_word <- lapply(top_words[top_words$Issue == 4,], as.character)
+# issue5_word <- lapply(top_words[top_words$Issue == 5,], as.character)
+# issue6_word <- lapply(top_words[top_words$Issue == 6,], as.character)
+# issue7_word <- lapply(top_words[top_words$Issue == 7,], as.character)
+# issue8_word <- lapply(top_words[top_words$Issue == 8,], as.character)
+# issue9_word <- lapply(top_words[top_words$Issue == 9,], as.character)
+# issue10_word <- lapply(top_words[top_words$Issue == 10,], as.character)
+# issue11_word <- lapply(top_words[top_words$Issue == 11,], as.character)
+# issue12_word <- lapply(top_words[top_words$Issue == 12,], as.character)
+# issue13_word <- lapply(top_words[top_words$Issue == 13,], as.character)
 
 features_func_issue <- function(data) {
   features <- data %>%
@@ -202,28 +202,28 @@ features_func_issue <- function(data) {
              sum(ifelse(word %in% issue1_word$top_word,1,0)),
            issue2_word_count =
              sum(ifelse(word %in% issue2_word$top_word,1,0)),
-           issue3_word_count =
-             sum(ifelse(word %in% issue3_word$top_word,1,0)),
-           issue4_word_count =
-             sum(ifelse(word %in% issue4_word$top_word,1,0)),
-           issue5_word_count =
-             sum(ifelse(word %in% issue5_word$top_word,1,0)),
-           issue6_word_count =
-             sum(ifelse(word %in% issue6_word$top_word,1,0)),
-           issue7_word_count =
-             sum(ifelse(word %in% issue7_word$top_word,1,0)),
-           issue8_word_count =
-             sum(ifelse(word %in% issue8_word$top_word,1,0)),
-           issue9_word_count =
-             sum(ifelse(word %in% issue9_word$top_word,1,0)),
-           issue10_word_count =
-             sum(ifelse(word %in% issue10_word$top_word,1,0)),
-           issue11_word_count =
-             sum(ifelse(word %in% issue11_word$top_word,1,0)),
-           issue12_word_count =
-             sum(ifelse(word %in% issue12_word$top_word,1,0)),
-           issue13_word_count =
-             sum(ifelse(word %in% issue13_word$top_word,1,0)),
+           # issue3_word_count =
+           #   sum(ifelse(word %in% issue3_word$top_word,1,0)),
+           # issue4_word_count =
+           #   sum(ifelse(word %in% issue4_word$top_word,1,0)),
+           # issue5_word_count =
+           #   sum(ifelse(word %in% issue5_word$top_word,1,0)),
+           # issue6_word_count =
+           #   sum(ifelse(word %in% issue6_word$top_word,1,0)),
+           # issue7_word_count =
+           #   sum(ifelse(word %in% issue7_word$top_word,1,0)),
+           # issue8_word_count =
+           #   sum(ifelse(word %in% issue8_word$top_word,1,0)),
+           # issue9_word_count =
+           #   sum(ifelse(word %in% issue9_word$top_word,1,0)),
+           # issue10_word_count =
+           #   sum(ifelse(word %in% issue10_word$top_word,1,0)),
+           # issue11_word_count =
+           #   sum(ifelse(word %in% issue11_word$top_word,1,0)),
+           # issue12_word_count =
+           #   sum(ifelse(word %in% issue12_word$top_word,1,0)),
+           # issue13_word_count =
+           #   sum(ifelse(word %in% issue13_word$top_word,1,0)),
            
     ) %>%
     select(-word) %>%

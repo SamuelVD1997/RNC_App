@@ -14,7 +14,7 @@ library(DT)
 library(rintrojs)
 library(shinyBS)
 library(shinyjs)
-
+library(lubridate)
 fluid_design <- function(id, w, x, y, z) {
   fluidRow(div(
     id = id,
@@ -64,17 +64,6 @@ ui <- dashboardPage(
           menuSubItem("Zone 4", tabName = "Zone4"),
           menuSubItem("Zone 5", tabName = "Zone5"),
           menuSubItem("MTS", tabName = "MTS")
-        ),
-        menuItem(
-          "PU2",
-          tabName = "APU2",
-          menuSubItem("General", tabName = "GeneralPU2"),
-          menuSubItem("Slats", tabName = "Slats"),
-          menuSubItem("Tailcone 5/6", tabName = "TC5/6"),
-          menuSubItem("Tailcone 7/8", tabName = "TC7/8"),
-          menuSubItem("Zone 1", tabName = "Zone1PU2"),
-          menuSubItem("Zone 2", tabName = "Zone2PU2"),
-          menuSubItem("Zone 3", tabName = "Zone3PU2")
         )
       ),
       menuItem("Data", tabName = "view_data", icon = icon("stream")),
@@ -314,7 +303,7 @@ ui <- dashboardPage(
                                column(6,
                                       img(
                                         class = "img-responsive img-rounded center-block",
-                                        src = 'Q321000806-1.PNG',
+                                        src = 'Q321003378-1.PNG',
                                         height = '100%',
                                         width = '100%'
                                       )
@@ -363,7 +352,7 @@ ui <- dashboardPage(
                         column(6,
                                img(
                                  class = "img-responsive img-rounded center-block",
-                                 src = 'Q321003378-1.PNG',
+                                 src = 'Q321000806-1.PNG',
                                  height = '100%',
                                  width = '100%'
                                )
@@ -2966,26 +2955,7 @@ ui <- dashboardPage(
       ),
       
       # E Zone MTS
-    tabItem(
-      tabName = "Slats"
-    ),
-    tabItem(
-      tabName = "TC5/6"
-    ),
-    tabItem(
-      tabName = "TC7/8"
-    ),
-    tabItem(
-      tabName = "Zone1PU2"
-    ),
-    tabItem(
-      tabName = "Zone2PU2"
-    ),
-    tabItem(
-      tabName = "Zone3PU2"
-    ),
-    
-    
+      
       tabItem(
         tabName = "view_data",
         

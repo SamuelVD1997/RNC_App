@@ -66,6 +66,7 @@ library(data.table)
 library(cleanNLP)
 library(shiny)
 library(shinydashboard)
+library(lubridate)
 
 Previous_Button=tags$div(actionButton("Prev_Tab",HTML('<div class="col-sm-4"><i class="fa fa-angle-double-left fa-2x"></i></div>
                                                                   ')))
@@ -168,22 +169,26 @@ HoursSite <- read_excel("HoursSite.xlsx")
 
 SupervisedL <- read.csv("./ML/SupervisedL.csv")
 
+
+SupervisedL <- SupervisedL[c(3,12:16)]
+
 library(readxl)
 RNCDay <- read_excel("Encms.xlsx")
 RNCDay$RNC <- paste0(RNCDay$`NCR Number`, '-', RNCDay$`Discrepancy Number`)
 
 
 if (format(Sys.Date(),"%A") == "Monday") {
-  Fecha <- format(Sys.Date()-3,"%Y-%m-%d")
+  Fecha <- format(Sys.Date()-5,"%Y-%m-%d")
 } else {
-  Fecha <- as.Date(format(Sys.Date()-2,"%Y-%m-%d"))
+  Fecha <- as.Date(format(Sys.Date()-1,"%Y-%m-%d"))
 }
 
 
 RNCDay$`Discrepancy Creation Date` <- as.Date(RNCDay$`Discrepancy Creation Date`)
 RNCDay <- filter(RNCDay,`Discrepancy Creation Date` == Fecha)
 RNCDay$`Discrepancy Creation Date` <-as.Date(format(RNCDay$`Discrepancy Creation Date`,"%d-%m-%Y"))
-
+year(RNCDay$`Creation Date`) <- 2021
+year(RNCDay$`Discrepancy Creation Date`) <- 2021
 
 RNCPU1 <- filter(RNCDay,`Plant Code` == 'Q4')
 
@@ -230,7 +235,8 @@ RNCDay$`Work Center` <- substr(RNCDay$`Work Center`, 1, 6)
 
 library(readr)
 PU11WC <- read_csv("WC.csv")
-PU2WC <- read_csv("WC_PU2.csv") 
+PU2WC <- read_csv("WC_PU2.csv")
+
 RNCDay$`Discrepancy Text`[is.na(RNCDay$`Discrepancy Text`)] <- "UNDEFINED IF METHODS"
 
 
@@ -281,7 +287,7 @@ RNCPU2 <- inner_join(RNCPU2,PU2WC, by = 'Work Center')
 
 RNCPU2 <- RNCPU2 %>% select(
   Plant,
-  Zone,
+  `Zone`,
   `RNC`,
   `NCR Type`,
   `Discrepancy Creation Date`,
@@ -400,22 +406,19 @@ server <- function(input, output, session) {
   })
   
   
-  if(format(Sys.Date(),"%A") == "Monday") {
+  if (format(Sys.Date(),"%A") == "Monday") {
     Dis <- 0
   } else if (format(Sys.Date(),"%A") == "Tuesday"){
     Dis <- 1
   } else if (format(Sys.Date(),"%A") == "Wednesday"){
     Dis <- 2
-  } else if (format(Sys.Date(),"%A") == "jueves"){
+  } else if (format(Sys.Date(),"%A") == "Thursday"){
     Dis <- 3
   } else if (format(Sys.Date(),"%A") == "Friday"){
     Dis <- 4
   }
   
-
   Daysofweek <-seq(Sys.Date()-Dis, Sys.Date(), by = "days")
-  
-  
   
   
   Week11 <- filter(TS11, Date %in% Daysofweek)
