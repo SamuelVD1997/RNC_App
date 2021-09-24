@@ -35,7 +35,7 @@ RNC <- Master
 if (format(Sys.Date(),"%A") == "Monday") {
   Fecha <- format(Sys.Date()-3,"%Y-%m-%d")
 } else {
-  Fecha <- as.Date(format(Sys.Date()-1,"%Y-%m-%d"))
+  Fecha <- as.Date(format(Sys.Date()-2,"%Y-%m-%d"))
 }
 
 ui <- dashboardPage(
@@ -64,6 +64,17 @@ ui <- dashboardPage(
           menuSubItem("Zone 4", tabName = "Zone4"),
           menuSubItem("Zone 5", tabName = "Zone5"),
           menuSubItem("MTS", tabName = "MTS")
+        ),
+        menuItem(
+          "PU2",
+          tabName = "APU2",
+          menuSubItem("General", tabName = "GeneralPU2"),
+          menuSubItem("Zone 1", tabName = "Zone1PU2"),
+          menuSubItem("Zone 2", tabName = "Zone2PU2"),
+          menuSubItem("Zone 3", tabName = "Zone3PU2"),
+          menuSubItem("Tailcone 5/6", tabName = "TC56"),
+          menuSubItem("Tailcone 7/8", tabName = "TC78"),
+          menuSubItem("Slats", tabName = "Slats")
         )
       ),
       menuItem("Data", tabName = "view_data", icon = icon("stream")),
@@ -2953,9 +2964,32 @@ ui <- dashboardPage(
         
         
       ),
+    
       
       # E Zone MTS
       
+     tabItem(
+      tabName = "GeneralPU2",
+     ),
+    tabItem(
+      tabName = "Zone1PU2",
+    ),
+    tabItem(
+      tabName = "Zone2PU2",
+    ),
+    tabItem(
+      tabName = "Zone3PU2",
+    ),
+    tabItem(
+      tabName = "TC56",
+    ),
+    tabItem(
+      tabName = "TC78",
+    ),
+    tabItem(
+      tabName = "Slats",
+    ),
+    
       tabItem(
         tabName = "view_data",
         

@@ -178,9 +178,9 @@ RNCDay$RNC <- paste0(RNCDay$`NCR Number`, '-', RNCDay$`Discrepancy Number`)
 
 
 if (format(Sys.Date(),"%A") == "Monday") {
-  Fecha <- format(Sys.Date()-5,"%Y-%m-%d")
+  Fecha <- format(Sys.Date()-3,"%Y-%m-%d")
 } else {
-  Fecha <- as.Date(format(Sys.Date()-1,"%Y-%m-%d"))
+  Fecha <- as.Date(format(Sys.Date()-2,"%Y-%m-%d"))
 }
 
 
