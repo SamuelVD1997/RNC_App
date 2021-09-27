@@ -2956,6 +2956,195 @@ ui <- dashboardPage(
       
       # E Zone MTS
       
+<<<<<<< Updated upstream
+=======
+     tabItem(
+      tabName = "GeneralPU2"
+     ),
+    
+    tabItem(
+      tabName = "Zone1PU2",
+      h1("Last Month Results"),
+      h2("Time Series"),
+      # plotlyOutput("TS1PU2", height = "250px"),
+      h2("Topics Details"),
+      plotlyOutput("Topics1PU2", height = "300px"),
+      br(),
+      
+      #----
+      
+      fluidRow(
+        box(width = 12,
+            tabBox(
+              width = 12,
+              tabPanel(title = "Topic 1.",
+                       status = "primary",
+                       box(width = 12,
+                           h1("At Rear Spar A Deviation Is Noted At Local Axis Center Line Of Hingesr"),
+                           h1("     "),
+                           h1("     "),
+                           fluidRow(
+                             
+                             column(6,
+                                    
+                                    fluidRow(
+                                      valueBoxOutput("CountZ1_1PU2"),
+                                      valueBoxOutput("CostZ1_1PU2")
+                                    ),
+                                    
+                                    fluidRow(
+                                      valueBoxOutput("ActionZ1_1PU2"),
+                                      valueBoxOutput("PhaseZ1_1PU2")
+                                    ),
+                                    fluidRow(
+                                      valueBoxOutput("ReferenceZ1_1PU2"),
+                                      valueBoxOutput("ECDZ1_1PU2")
+                                    )
+                             ),
+                             
+                             column(6,
+                                    img(
+                                      class = "img-responsive img-rounded center-block",
+                                      src = 'Z1_1.PNG',
+                                      height = '100%',
+                                      width = '100%'
+                                    )
+                                    
+                             )
+                             
+                           ),
+                           
+                           h1("     "),
+                           h1("     "),
+                           h1("     "),
+                           h1("     "),
+                           
+                           
+                           plotlyOutput("STTopicZ1_1PU2", height = "250px")
+                           
+                       )),
+              
+              tabPanel(
+                status = "success",
+                title = "Topic 2.",
+                solidHeader = TRUE,
+                box(width = 12,
+                    h1("Overgap Between  Bushing And Guard Pin"),
+                    h1("     "),
+                    h1("     "),
+                    fluidRow(
+
+                      column(6,
+
+                             fluidRow(
+                               valueBoxOutput("CountZ1_2PU2"),
+                               valueBoxOutput("CostZ1_2PU2")
+                             ),
+
+                             fluidRow(
+                               valueBoxOutput("ActionZ1_2PU2"),
+                               valueBoxOutput("PhaseZ1_2PU2")
+                             ),
+                             fluidRow(
+                               valueBoxOutput("ReferenceZ1_2PU2"),
+                               valueBoxOutput("ECDZ1_2PU2")
+                             )
+                      ),
+
+                      column(6,
+                             img(
+                               class = "img-responsive img-rounded center-block",
+                               src = 'Z2_2.PNG',
+                               height = '100%',
+                               width = '100%'
+                             )
+
+                      )
+
+                    ),
+
+                    h1("     "),
+                    h1("     "),
+                    h1("     "),
+                    h1("     "),
+
+
+                    plotlyOutput("STTopicZ1_2PU2", height = "250px")
+
+                )),
+              # tabPanel(
+              #   status = "success",
+              #   title = "Topic 3.",
+              #   solidHeader = TRUE,
+              #   box(width = 12,
+              #       h1("Was Installed At Wrong Side Conduit Assy, Satcom And Conduit Assy, Satcom Coax"),
+              #       h1("     "),
+              #       h1("     "),
+              #       fluidRow(
+              #         
+              #         column(6,
+              #                
+              #                fluidRow(
+              #                  valueBoxOutput("CountZ1_3PU2"),
+              #                  valueBoxOutput("CostZ1_3PU2")
+              #                ),
+              #                
+              #                fluidRow(
+              #                  valueBoxOutput("ActionZ1_3PU2"),
+              #                  valueBoxOutput("PhaseZ1_3PU2")
+              #                ),
+              #                fluidRow(
+              #                  valueBoxOutput("ReferenceZ1_3PU2"),
+              #                  valueBoxOutput("ECDZ1_3PU2")
+              #                )
+              #         ),
+              #         
+              #         column(6,
+              #                img(
+              #                  class = "img-responsive img-rounded center-block",
+              #                  src = 'Z2_3.PNG',
+              #                  height = '100%',
+              #                  width = '100%'
+              #                )
+              #                
+              #         )
+              #         
+              #       ),
+              #       
+              #       h1("     "),
+              #       h1("     "),
+              #       h1("     "),
+              #       h1("     "),
+              #       
+              #       
+              #       plotlyOutput("STTopicZ1_3PU2", height = "250px")
+              #       
+              #   ))
+              
+            ))
+        
+        
+        
+        
+      )
+    ),
+    tabItem(
+      tabName = "Zone2PU2",
+    ),
+    tabItem(
+      tabName = "Zone3PU2",
+    ),
+    tabItem(
+      tabName = "TC56",
+    ),
+    tabItem(
+      tabName = "TC78",
+    ),
+    tabItem(
+      tabName = "Slats",
+    ),
+    
+>>>>>>> Stashed changes
       tabItem(
         tabName = "view_data",
         

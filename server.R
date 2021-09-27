@@ -407,6 +407,12 @@ server <- function(input, output, session) {
   } else if (format(Sys.Date(),"%A") == "Friday"){
     Dis <- 4
   }
+  else if (format(Sys.Date(),"%A") == "Saturday"){
+    Dis <- 5
+  }
+  else if (format(Sys.Date(),"%A") == "Sunday"){
+    Dis <- 6
+  }
   
   Daysofweek <-seq(Sys.Date()-Dis, Sys.Date(), by = "days")
   
@@ -6367,4 +6373,136 @@ server <- function(input, output, session) {
     
   })
   
+  #---------------
+  Topics1_PU2 <- read_excel("./ML_PU2/Z1.xlsx")
+  Issues1_PU2 <- read_excel("./ML_PU2/Issues_PU2.xlsx", 
+                       sheet = "Z1")
+  
+  IssueZ1_1PU2 <- Issues1_PU2 %>% filter(Issue == 1)
+  output$CountZ1_1PU2 <- renderValueBox({
+    valueBox(
+      paste0(Topics1_PU2 %>% filter(Issue == 1) %>% nrow()), "RNCs This Year", icon = icon("list"),
+      color = "purple"
+    )
+  })
+  
+  output$Topics1PU2 <- renderPlotly({
+    
+    
+    TopicsTS <- Topics1_PU2 %>% group_by(Issue) %>% summarize(count = n())
+    TopicsTS$Issue <- as.factor(TopicsTS$Issue)
+    plot_ly(TopicsTS, x = ~Issue, y = ~count, type = 'bar',
+            marker = list(color = 'rgb(158,202,225)',
+                          line = list(color = 'rgb(8,48,107)',
+                                      width = 1.5)), 
+            hoverinfo = 'text',
+            text = ~paste(count, ' RNCs')
+    ) %>% layout(title = "Topics")
+    
+    
+  })
+  
+  
+  output$ActionZ1_1PU2 <- renderValueBox({
+    if(IssueZ1_1PU2$Phase == 3){
+      Action <- "Yes"
+    }else if(IssueZ1_1PU2$Phase == 4){
+      Action <- "Closed"
+    }else{
+      Action <- "No"
+    }
+    
+    valueBox(
+      paste0(Action), "It has an Action", icon = icon("list"),
+      color = "orange"
+    )
+  })
+  
+  output$PhaseZ1_1PU2 <- renderValueBox({
+    valueBox(
+      paste0(IssueZ1_1PU2$Phase), "Phase", icon = icon("list"),
+      color = "green"
+    )
+  })
+  
+  output$ReferenceZ1_1PU2 <- renderValueBox({
+    valueBox(
+      paste0(IssueZ1_1PU2$Ref), "As Reference", icon = icon("list"),
+      color = "red"
+    )
+  })
+  
+  output$CostZ1_1PU2 <- renderValueBox({
+    valueBox(
+      paste0((Topics1_PU2 %>% filter(Issue == 1) %>% nrow())*500), "USD, Total Cost", icon = icon("list"),
+      color = "blue"
+    )
+  })
+  
+  output$ECDZ1_1PU2 <- renderValueBox({
+    valueBox(
+      paste0(IssueZ1_1PU2$ECD), "As ECD", icon = icon("list"),
+      color = "yellow"
+    )
+  })
+  
+  #--
+  IssueZ1_2PU2 <- Issues1_PU2 %>% filter(Issue == 2)
+  
+  output$CountZ1_2PU2 <- renderValueBox({
+    valueBox(
+      paste0(Topics1_PU2 %>% filter(Issue == 2) %>% nrow()), "RNCs This Year", icon = icon("list"),
+      color = "purple"
+    )
+  })
+  
+  
+  
+  output$ActionZ1_2PU2 <- renderValueBox({
+    if(IssueZ1_2PU2$Phase == 3){
+      Action <- "Yes"
+    }else if(IssueZ1_2PU2$Phase == 4){
+      Action <- "Closed"
+    }else{
+      Action <- "No"
+    }
+    
+    valueBox(
+      paste0(Action), "It has an Action", icon = icon("list"),
+      color = "orange"
+    )
+  })
+  
+  output$PhaseZ1_2PU2 <- renderValueBox({
+    valueBox(
+      paste0(IssueZ1_2PU2$Phase), "Phase", icon = icon("list"),
+      color = "green"
+    )
+  })
+  
+  output$ReferenceZ1_2PU2 <- renderValueBox({
+    valueBox(
+      paste0(IssueZ1_2PU2$Ref), "As Reference", icon = icon("list"),
+      color = "red"
+    )
+  })
+  
+  output$CostZ1_2PU2 <- renderValueBox({
+    valueBox(
+      paste0((Topics1_PU2 %>% filter(Issue == 2) %>% nrow())*500), "USD, Total Cost", icon = icon("list"),
+      color = "blue"
+    )
+  })
+  
+  output$ECDZ1_2PU2 <- renderValueBox({
+    valueBox(
+      paste0(IssueZ1_2PU2$ECD), "As ECD", icon = icon("list"),
+      color = "yellow"
+    )
+  })
+  
+  
+  #-----------
+  
 }
+
